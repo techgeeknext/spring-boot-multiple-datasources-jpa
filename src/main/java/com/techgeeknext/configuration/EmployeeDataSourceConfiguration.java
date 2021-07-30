@@ -41,8 +41,8 @@ public class EmployeeDataSourceConfiguration {
      */
     @Bean
     @Primary
-    @ConfigurationProperties("spring.datasource.user.configuration")
-    public DataSource userDataSource() {
+    @ConfigurationProperties("spring.datasource.employee.configuration")
+    public DataSource employeeDataSource() {
         return employeeDatasourceProperties().initializeDataSourceBuilder()
                 .type(HikariDataSource.class).build();
     }
@@ -57,7 +57,7 @@ public class EmployeeDataSourceConfiguration {
     @Bean(name = "employeeEntityManagerFactory")
     public LocalContainerEntityManagerFactoryBean employeeEntityManagerFactory(EntityManagerFactoryBuilder builder) {
         return builder
-                .dataSource(userDataSource())
+                .dataSource(employeeDataSource())
                 // for specifying package .packages("com.techgeeknext.entities.employee.type")
                 .packages(Employee.class)
                 .build();
